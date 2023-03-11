@@ -5,6 +5,7 @@ import { getManagerMessages } from "./dao/daoManager.js";
 import { __dirname, __filename } from "./path.js";
 import routerSocket from "./routes/socket.routes.js";
 import routerProduct from "./routes/products.routes.js";
+import routerCart from "./routes/cart.routes.js";
 import { engine } from 'express-handlebars';
 import * as path from 'path'
 import routerChat from "./routes/chat.routes.js";
@@ -53,3 +54,4 @@ app.use('/', routerSocket)
 app.use('/chat', routerChat)
 app.use('/', express.static(__dirname + '/public'))
 app.use('/api/products', routerProduct)
+app.use("/api/carts", routerCart)
