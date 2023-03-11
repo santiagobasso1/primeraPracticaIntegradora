@@ -30,4 +30,3 @@ socket.on("allMessages", arrayMensajes => {
         parrafosMensajes.innerHTML += `<p><strong>${mensaje.nombre}</strong>(${mensaje.email}): ${mensaje.message} </p>`
     });
 })
-
