@@ -39,6 +39,9 @@ io.on("connection", async (socket) => {
             })
         })
     })
+    managerMessage.getElements().then((mensajes) => {
+        socket.emit("allMessages", mensajes)
+    })
     socket.emit("getProducts",  await productManager.getAllProducts()); //Envia los productos del carrito al cliente
 
 })
