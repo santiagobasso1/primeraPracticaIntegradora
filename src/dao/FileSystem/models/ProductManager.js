@@ -1,5 +1,5 @@
 import fs from "fs";
-
+import { getManagerProducts } from "../../daoManager.js";
 
 
 class Producto {
@@ -26,6 +26,7 @@ const producto7 = new Producto("IX570 Plus", "Motherboard", 46200, ["./img/X570p
 const producto8 = new Producto("I7 11700K", "Procesador gama alta", 2525234, ["./img/i7_11700k.jpg"] , "aaah", 526,true,"procesadores");
 const producto9 = new Producto("RTX 3090 EVGA", "Grafica Gama Alta", 32421, ["./img/rtx3090.jpg"] , "aaai", 32,true,"tarjetas graficas");
 const producto10 = new Producto("Ryzen 5 5600", "Procesador Gama Media", 132512,  ["./img/Ryzen_5_5600.jpg"] , "aaaj", 22,true,"procesadores");
+
 
 export class ProductManager {
     constructor(path) {
@@ -172,7 +173,9 @@ export class ProductManager {
             return "No se encontró el producto que desea eliminar"
         }        
     }
-        
+    devolverArrayProductos = ()=>{
+        return [producto1,producto2,producto3,producto4,producto5,producto6,producto7,producto8,producto9]
+    }
     cargarArchivo = async () => {
         //tests pedidos y adicionales:
         await this.crearArchivo(); //Es para que si no tiene el array vacio al inicio se lo ponga así evitamos errores, y para asegurarnos que existe el archivo

@@ -4,11 +4,10 @@ import { ProductManager } from "../dao/FileSystem/models/ProductManager.js";
 const manager = new ProductManager('src/dao/FileSystem/Files/products.json');
 
 
-
 routerProduct.get("/", async (req, res) => {
-    if (!manager.checkArchivo()){
-        await manager.cargarArchivo();  //Esto es para cargar el archivo así facilitar su testeo, en caso de  querer cargarlo descomentar y ejecutar el get de la raiz /api/products
-    }
+    // if (!manager.checkArchivo()){
+    //     await manager.cargarArchivo();  //Esto es para cargar el archivo así facilitar su testeo, en caso de  querer cargarlo descomentar y ejecutar el get de la raiz /api/products
+    // }
     try{
         const products = await manager.getAllProducts();
         if (products.length>0){

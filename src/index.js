@@ -54,37 +54,32 @@ io.on("connection", async (socket) => {
     managerMessage.getElements().then((mensajes) => {
         socket.emit("allMessages", mensajes)
     })
-    //Estatico, desde FS
-    socket.emit("getProducts",  await productManager.getAllProducts()); //Envia los productos del carrito al cliente
-    // socket.on("addProduct", async info =>{ //El socket "on" es cuando se recibe información del lado del cliente
-    //     const newProduct = {...info, status:true };
-    //     var mensajeAgregar = await productManager.addProduct(newProduct); //Agregar un producto y guarda el mensaje en un variable para mandarlo al usuario y mostrarlo al servidor
-    //     socket.emit("mensajeProductoAgregado",mensajeAgregar)
-    //     console.log(mensajeAgregar)
-    //   })
-    //Products
+    managerProduct.getElements().then((products) => {
+        socket.emit("getProducts", products)
+    })
     socket.on("addProduct", async (info) => {
-        console.log(info)
+        //Si se quiere agregar elementos al archivo, colocar "productManager.devolverArrayProductos()" en lugar de [info]
         managerProduct.addElements([info]).then(() => {
             managerProduct.getElements().then((products) => {
-            socket.emit("allMessages", products)
+            socket.emit("getProducts", products)
         })
     })
-})
-managerProduct.getElements().then((products) => {
-    socket.emit("allProducts", products)
-    console.log(products)
-})
+    })
+    
+
+
+
+
     
     socket.on("deleteProduct", async id=>{
-        console.log("HOLOA")
-        var mensajeBorrar = await productManager.deleteProductById(id)
-        socket.emit("mensajeProductoEliminado",mensajeBorrar)
-        console.log(mensajeBorrar) //Para mostrar al servidor el mensaje
-      })
+        managerProduct.deleteElement(id).then(() => {
+            managerProduct.getElements().then((products) => {
+            socket.emit("getProducts", products)
+            })
+        })
+    })
+
 })
-
-
 
 //Routes
 app.use('/', routerSocket)

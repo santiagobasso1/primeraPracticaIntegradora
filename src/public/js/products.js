@@ -41,15 +41,15 @@ socket.on("getProducts", products =>{
             <p class="card-text">Precio: ${product.price} </p>       
             <p class="card-text">Stock: ${product.stock} </p>   
             <p class="card-text">Code: ${product.code} </p>                                               
-            <a id="botonProducto${product.id}" class="btn btn-primary">Eliminar</a>
+            <a id="botonProducto${product._id}" class="btn btn-primary">Eliminar</a>
         </div>
         `
-    });
+    })
 
 
     products.forEach(product=>{
-        document.getElementById(`botonProducto${product.id}`).addEventListener("click",(e)=>{
-            socket.emit("deleteProduct", product.id) 
+        document.getElementById(`botonProducto${product._id}`).addEventListener("click",(e)=>{
+            socket.emit("deleteProduct", product._id) 
             socket.on("mensajeProductoEliminado",mensaje=>{
                 console.log(mensaje) //Para mostrarle al cliente el mensaje
             })
