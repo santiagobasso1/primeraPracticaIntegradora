@@ -1,8 +1,8 @@
 import { Router } from "express";
-import {ProductManager} from "../controllers/ProductManager.js"
+import {ProductManager} from "../dao/FileSystem/models/ProductManager.js"
 
 const routerSocket = Router();
-const productManager = new ProductManager('src/dao/FileSystem/models/products.json');
+const productManager = new ProductManager('src/dao/FileSystem/Files/products.json');
 
 
   routerSocket.get('/', async(req,res) => {

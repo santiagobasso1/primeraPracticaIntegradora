@@ -1,8 +1,8 @@
 import fs from "fs";
 
 
-const rutaArchivoCart = "src/dao/FileSystem/models/carts.json"
-const rutaArchivoProducts =  "src/dao/FileSystem/models/products.json"
+const rutaArchivoCart = "src/dao/FileSystem/Files/carts.json"
+const rutaArchivoProducts =  "src/dao/FileSystem/Files/products.json"
 class Cart {
     constructor(id, products) {
         this.id = id;

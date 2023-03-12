@@ -1,6 +1,19 @@
 const socket = io()
 
 
+const form = document.getElementById("realTimeProductsForm")
+form.addEventListener("submit", (e)=>{
+    e.preventDefault();
+    const title = document.getElementById("formTitle").value
+    const description = document.getElementById("formDescription").value
+    const price = document.getElementById("formPrice").value
+    const thumbnail = document.getElementById("formThumbnail").value
+    const code = document.getElementById("formCode").value
+    const stock = document.getElementById("formStock").value
+    const category = document.getElementById("formCategory").value
+    const product = {title,description,price,thumbnail,code,stock,category}    
+    socket.emit("addProduct", product) 
+})
 socket.on("getProducts", products =>{
 
     document.getElementById("productsCard").innerHTML=""
