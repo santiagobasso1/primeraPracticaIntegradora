@@ -56,20 +56,25 @@ io.on("connection", async (socket) => {
     })
     //Estatico, desde FS
     socket.emit("getProducts",  await productManager.getAllProducts()); //Envia los productos del carrito al cliente
-    socket.on("addProduct", async info =>{ //El socket "on" es cuando se recibe información del lado del cliente
-        const newProduct = {...info, status:true };
-        var mensajeAgregar = await productManager.addProduct(newProduct); //Agregar un producto y guarda el mensaje en un variable para mandarlo al usuario y mostrarlo al servidor
-        socket.emit("mensajeProductoAgregado",mensajeAgregar)
-        console.log(mensajeAgregar)
-      })
+    // socket.on("addProduct", async info =>{ //El socket "on" es cuando se recibe información del lado del cliente
+    //     const newProduct = {...info, status:true };
+    //     var mensajeAgregar = await productManager.addProduct(newProduct); //Agregar un producto y guarda el mensaje en un variable para mandarlo al usuario y mostrarlo al servidor
+    //     socket.emit("mensajeProductoAgregado",mensajeAgregar)
+    //     console.log(mensajeAgregar)
+    //   })
     //Products
-    socket.on("products", async (info) => {
+    socket.on("addProduct", async (info) => {
+        console.log(info)
         managerProduct.addElements([info]).then(() => {
-        managerProduct.getElements().then((productos) => {
-            socket.emit("allProducts", productos)
-            })
+            managerProduct.getElements().then((products) => {
+            socket.emit("allMessages", products)
         })
     })
+})
+managerProduct.getElements().then((products) => {
+    socket.emit("allProducts", products)
+    console.log(products)
+})
     
     socket.on("deleteProduct", async id=>{
         console.log("HOLOA")

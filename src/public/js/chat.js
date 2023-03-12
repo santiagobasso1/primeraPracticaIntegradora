@@ -20,6 +20,8 @@ botonChat.addEventListener("click", (e) => {
         mensaje.value="";
         socket.emit("message", newMessage)
         textoUsuario.value = "" 
+    }else{
+        console.error("Mensaje vacio")
     }
 })
 
