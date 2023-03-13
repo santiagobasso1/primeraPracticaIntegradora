@@ -21,7 +21,11 @@ form.addEventListener("submit", (e)=>{
         status: true,
         category:category.value
     }    
-    socket.emit("addProduct", product) 
+    if (title.value.length > 0 && description.value.length > 0 && price.value.length > 0 && thumbnail.value.length > 0 && code.value.length > 0 && stock.value.length > 0 && category.value.length > 0){
+        socket.emit("addProduct", product) 
+    }else{
+        console.log("Falta algún dato por llenar")
+    }
 })
 
 
